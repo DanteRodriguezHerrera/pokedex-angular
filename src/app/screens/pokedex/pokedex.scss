@@ -33,13 +33,12 @@
         background: radial-gradient(circle, #cacaca 5%, #000000 10%);;
         padding: 2%;
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
         overflow-y: auto;
 
         .pokemon-card {
             width: 20%;
-            margin: 10px 1px;
+            margin: 10px 30px;
             height: 40%;
             margin-bottom: 2%;
 
@@ -72,11 +71,82 @@
                 border-bottom: 3px solid rgb(197, 197, 197);
                 border-right: 3px solid rgb(197, 197, 197);
 
-
                 .type {
                     border: 1px solid black;
                     padding: 5px 10px;
                     border-radius: 10px;
+                }
+
+                .bug {
+                    background: #729f3f;
+                }
+
+                .dragon {
+                    background: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
+                }
+
+                .fairy {
+                    background: #fdb9e9;
+                }
+
+                .fire {
+                    background: #fd7d24;
+                }
+
+                .ghost {
+                    background: #7b62a3;
+                }
+
+                .ground {
+                    background: linear-gradient(180deg, #f7de3f 50%, #ab9842 50%);
+                }
+
+                .normal {
+                    background: #a4acaf;
+                }
+
+                .psychic {
+                    background: #f366b9;
+                }
+
+                .steel {
+                    background: #9eb7b8;
+                }
+
+                .dark {
+                    background: #707070;
+                }
+
+                .electric {
+                    background: #eed535;
+                }
+
+                .fighting {
+                    background: #d56723;
+                }
+
+                .flying {
+                    background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+                }
+
+                .grass {
+                    background: #9bcc50;
+                }
+
+                .ice {
+                    background: #51c4e7;
+                }
+
+                .poison {
+                    background: #b97fc9;
+                }
+
+                .rock {
+                    background: #a38c21;
+                }
+
+                .water {
+                    background: #4592c4;
                 }
             }
         }

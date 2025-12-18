@@ -3,64 +3,85 @@
     <section class="search-pokemon">
         <div class="search-container">
             <h2>Buscar Pokemon</h2>
-            <input type="text">
+            <input type="text" [(ngModel)]="searchPokemon" (ngModelChange)="filterPokedex()">
         </div>
     </section>
 
     <section class="pokedex">
-        @for (pokemon of pokedex | slice : (pokedexPage - 1) * 20 : (pokedexPage - 1) * 20 + 20; track $index; let idx = $index ) {
-            <div class="pokemon-card">
-                <div class="pokemon-image">
-                    <img src="https://www.pngarts.com/files/3/Bulbasaur-PNG-Picture.png" alt="">
+        @defer (when isLoading() == 1025) {
+            
+            @for (pokemon of filteredPokedex | slice : (pokedexPage - 1) * 20 : (pokedexPage - 1) * 20 + 20; track $index; let idx = $index ) {
+                <div class="pokemon-card">
+                    <div class="pokemon-image">
+                        <img src={{pokemon.url}} alt="">
+                    </div>
+    
+                    <div class="pokemon-name">
+                        # {{pokemon.id}} - {{pokemon.name}}
+                    </div>
+    
+                    <div class="pokemon-types">
+                        @for (type of pokemon.types; track $index;) {
+                            <div class="type" [ngClass]="{
+                                'bug': type.type.name == 'bug',
+                                'dragon': type.type.name == 'dragon',
+                                'fairy': type.type.name == 'fairy',
+                                'fire': type.type.name == 'fire', 
+                                'ghost': type.type.name == 'ghost',
+                                'ground': type.type.name == 'ground',
+                                'normal': type.type.name == 'normal',
+                                'psychic': type.type.name == 'psychic', 
+                                'steel': type.type.name == 'steel', 
+                                'dark': type.type.name == 'dark', 
+                                'electric': type.type.name == 'electric', 
+                                'fighting': type.type.name == 'fighting', 
+                                'flying': type.type.name == 'flying', 
+                                'grass': type.type.name == 'grass', 
+                                'ice': type.type.name == 'ice', 
+                                'poison': type.type.name == 'poison', 
+                                'rock': type.type.name == 'rock', 
+                                'water': type.type.name == 'water', 
+                                }">
+                                {{type.type.name}}
+                            </div>
+                        }
+                    </div>
                 </div>
-
-                <div class="pokemon-name">
-                    #{{pokemon + 1}} - Bulbasaur
-                </div>
-
-                <div class="pokemon-types">
-                    @for (type of [1, 1]; track $index) {
-                        <div class="type">
-                            Tipo
-                        </div>
-                    }
-                </div>
-            </div>
-
+            }
         }
+        @placeholder {
+            <div style="color: white;">
+                Cargando ({{isLoading()}} / 1025)
+            </div>
+        }
+        
     </section>
 
     <section class="paginator">
-        @if (pokedex.length <= 20) {
-            <button>
-                1
-            </button>
-        }
-        @else {
-            <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage = 1">
-                &#8606;
-            </button>
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage = 1;">
+            &#8606;
+        </button>
 
-            <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage -= 1">
-                &larr;
-            </button>
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage -= 1">
+            &larr;
+        </button>
 
-            <div class="pagination">
-                @for (page of numberOfPages; track $index; let idx = $index) {
-                    <button (click)="pokedexPage = (idx + 1)">
-                        {{idx + 1}}
-                    </button>
-                }
-            </div>
+        <div class="pagination">
+            @for (page of numberOfPages; track $index; let idx = $index) {
+                <button (click)="pokedexPage = idx + 1">
+                    {{idx + 1}}
+                </button>
+            }
+        </div>
 
-            <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage += 1">
-                &rarr;
-            </button>
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage += 1">
+            &rarr;
+        </button>
 
-            <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage = numberOfPages.length">
-                &#8608;
-            </button>
-        }
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage = numberOfPages.length">
+            &#8608;
+        </button>
+        
     </section>
 
 </div>
