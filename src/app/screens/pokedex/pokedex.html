@@ -17,7 +17,7 @@
                     </div>
     
                     <div class="pokemon-name">
-                        # {{pokemon.id}} - {{pokemon.name}}
+                        # {{pokemon.id}} - {{pokemon.name | upperFirstLetter}}
                     </div>
     
                     <div class="pokemon-types">
@@ -58,27 +58,27 @@
     </section>
 
     <section class="paginator">
-        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage = 1;">
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage = 1; scrollPage(1)">
             &#8606;
         </button>
 
-        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage -= 1">
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === 1" (click)="pokedexPage -= 1; scrollPage(pokedexPage - 1)">
             &larr;
         </button>
 
         <div class="pagination">
             @for (page of numberOfPages; track $index; let idx = $index) {
-                <button (click)="pokedexPage = idx + 1">
+                <button id="{{idx + 1}}" (click)="pokedexPage = idx + 1; scrollPage(idx + 1)">
                     {{idx + 1}}
                 </button>
             }
         </div>
 
-        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage += 1">
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage += 1; scrollPage(pokedexPage + 1)">
             &rarr;
         </button>
 
-        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage = numberOfPages.length">
+        <button [disabled]="numberOfPages.length < 1 || pokedexPage === numberOfPages.length" (click)="pokedexPage = numberOfPages.length; scrollPage(numberOfPages.length)">
             &#8608;
         </button>
         

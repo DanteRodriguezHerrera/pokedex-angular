@@ -6,10 +6,11 @@ import { range } from 'rxjs';
 import { PokemonResponse } from '../../core/interfaces/pokemon.interface';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { UpperFirstLetterPipe } from '../../utils/pipes/upper-first-letter-pipe';
 
 @Component({
   selector: 'app-pokedex',
-  imports: [SlicePipe, FormsModule, NgClass, RouterLink],
+  imports: [SlicePipe, FormsModule, NgClass, RouterLink, UpperFirstLetterPipe],
   templateUrl: './pokedex.html',
   styleUrl: './pokedex.scss',
 })
@@ -40,13 +41,13 @@ export class Pokedex implements OnInit{
       next: (res: PokedexResponse) => {
         res.results.map((entry, i) => {
           entry.id = i + 1;
-          entry.name = entry.name.charAt(0).toUpperCase() + entry.name.slice(1);
           entry.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`;
         })
 
         this.pokedex = res.results;
         this.filteredPokedex = res.results;
         this.numberOfPages = Array.from({length: Math.ceil(this.filteredPokedex.length / 20)}, (v, i) => i)
+
         this.getPokemonTypes();
       },
       error: err => {
@@ -58,8 +59,6 @@ export class Pokedex implements OnInit{
   getPokemonTypes() {
     this.pokemonTypes = [];
 
-    console.log(this.isLoading)
-
     range(1, 1025).subscribe({
       next: res => {
         this.pokemonService.getPokemon(res).subscribe({
@@ -70,10 +69,9 @@ export class Pokedex implements OnInit{
             if(this.pokemonTypes.length == 1025) {
               this.filteredPokedex.map((pokemon, i) => {
                 pokemon.types = this.pokemonTypes[i]
+                this.scrollPage(1)
               })              
-              console.log(this.isLoading())
             }
-
           },
           error: err => {
             console.log(err)
@@ -98,6 +96,15 @@ export class Pokedex implements OnInit{
 
       this.numberOfPages = Array.from({length: Math.ceil(this.filteredPokedex.length / 20)}, (v, i) => i)
     }
+  }
 
+  scrollPage(index: number) {
+
+    const page = document.getElementById(index.toString())
+
+    if(page) {
+      page.scrollIntoView()
+      // page.style.background = 'orange'
+    }
   }
 }

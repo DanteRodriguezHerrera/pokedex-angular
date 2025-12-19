@@ -164,10 +164,17 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin: 0 10px;
+            border-radius: 6px;
 
-            &:disabled {
+            &:disabled:hover {
                 cursor: default;
+                background: #E7E7E7;
             }
+
+            &:hover {
+                background: orange;
+            }
+
         }
         
         .pagination {

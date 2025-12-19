@@ -6,126 +6,142 @@
         </button>
     </section>
 
-    <section class="profile">
-            <div class="pokemon-image">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="">
+    @defer (on timer(500ms)) {
+        <section class="profile">
+                <div class="pokemon-image">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemonId}}.png" alt="">
+                </div>
+    
+                <div class="pokemon-types">
+                    @for (type of pokemon.types; track $index;) {
+                        <div class="type" [ngClass]="{
+                            'bug': type.type.name == 'bug',
+                            'dragon': type.type.name == 'dragon',
+                            'fairy': type.type.name == 'fairy',
+                            'fire': type.type.name == 'fire', 
+                            'ghost': type.type.name == 'ghost',
+                            'ground': type.type.name == 'ground',
+                            'normal': type.type.name == 'normal',
+                            'psychic': type.type.name == 'psychic', 
+                            'steel': type.type.name == 'steel', 
+                            'dark': type.type.name == 'dark', 
+                            'electric': type.type.name == 'electric', 
+                            'fighting': type.type.name == 'fighting', 
+                            'flying': type.type.name == 'flying', 
+                            'grass': type.type.name == 'grass', 
+                            'ice': type.type.name == 'ice', 
+                            'poison': type.type.name == 'poison', 
+                            'rock': type.type.name == 'rock', 
+                            'water': type.type.name == 'water', 
+                            }">
+                            {{type.type.name}}
+                             <!-- Tipo -->
+                        </div>
+                    }
+                </div>
+        </section>
+    
+        <section class="general-info">
+            <div class="general-column">
+                <h1>N° {{pokemonId}} - {{pokemon.name | upperFirstLetter}}</h1>
+                <div class="info">
+                    <h2>Altura</h2>
+                    <div class="info-value">{{pokemon.height * 10}} cm</div>
+                </div>
+                <div class="info">
+                    <h2>Peso</h2>
+                    <div class="info-value">{{pokemon.weight / 10}} kg</div>
+                </div>
+                <!-- <div class="info">
+                    <h2>Generación de aparición</h2>
+                    <h2></h2>
+                </div> -->
             </div>
-
-            <div class="pokemon-types">
-                @for (type of [1,1]; track $index;) {
-                    <!-- <div class="type" [ngClass]="{
-                        'bug': type.type.name == 'bug',
-                        'dragon': type.type.name == 'dragon',
-                        'fairy': type.type.name == 'fairy',
-                        'fire': type.type.name == 'fire', 
-                        'ghost': type.type.name == 'ghost',
-                        'ground': type.type.name == 'ground',
-                        'normal': type.type.name == 'normal',
-                        'psychic': type.type.name == 'psychic', 
-                        'steel': type.type.name == 'steel', 
-                        'dark': type.type.name == 'dark', 
-                        'electric': type.type.name == 'electric', 
-                        'fighting': type.type.name == 'fighting', 
-                        'flying': type.type.name == 'flying', 
-                        'grass': type.type.name == 'grass', 
-                        'ice': type.type.name == 'ice', 
-                        'poison': type.type.name == 'poison', 
-                        'rock': type.type.name == 'rock', 
-                        'water': type.type.name == 'water', 
-                        }"> -->
-                    <div class="type">
-                        <!-- {{type.type.name}} -->
-                         Tipo
-                    </div>
-                }
+    
+            <div class="divisor"></div>
+    
+            <div class="general-column">
+                <h1>Habilidades</h1>
+                <div class="info">
+                    <h2>Normal</h2>
+                    <div class="info-value">{{pokemon.abilities[0].ability.name | upperFirstLetter}}</div>
+                </div>
+                <div class="info">
+                    <h2>Oculta</h2>
+                    @if (!pokemon.abilities[1]) {
+                        <div class="info-value">No pose</div>
+                    }
+                    @else {
+                        <div class="info-value">{{pokemon.abilities[1].ability.name | upperFirstLetter}}</div>
+                    }
+                </div>
             </div>
-    </section>
-
-    <section class="general-info">
-        <div class="general-column">
-            <h1>N° 1 - Bulbasaur</h1>
-            <div class="info">
-                <h2>Altura</h2>
-                <div class="info-value">{{7 * 10}} cm</div>
+        </section>
+    
+        <section class="stats">
+            <div class="stat-container">
+                <h2>HP</h2>
+                <div class="stat">{{pokemon.stats[0].base_stat}}</div>
             </div>
-            <div class="info">
-                <h2>Peso</h2>
-                <div class="info-value">{{69 / 10}} kg</div>
+    
+            <div class="stat-container">
+                <h2>Ataque</h2>
+                <div class="stat">{{pokemon.stats[1].base_stat}}</div>            
             </div>
-            <!-- <div class="info">
-                <h2>Generación de aparición</h2>
-                <h2></h2>
-            </div> -->
-        </div>
-
-        <div class="divisor"></div>
-
-        <div class="general-column">
-            <h1>Habilidades</h1>
-            <div class="info">
-                <h2>Normal</h2>
-                <div class="info-value">overgrow</div>
+    
+            <div class="stat-container">
+                <h2>Defensa</h2>
+                <div class="stat">{{pokemon.stats[2].base_stat}}</div>
             </div>
-            <div class="info">
-                <h2>Oculta</h2>
-                <div class="info-value">chlorophyll</div>
+    
+            <div class="stat-container">
+                <h2>At. Especial</h2>
+                <div class="stat">{{pokemon.stats[3].base_stat}}</div>
             </div>
+    
+            <div class="stat-container">
+                <h2>Def. Especial</h2>
+                <div class="stat">{{pokemon.stats[4].base_stat}}</div>
+            </div>
+    
+            <div class="stat-container">
+                <h2>Velocidad</h2>
+                <div class="stat">{{pokemon.stats[5].base_stat}}</div>
+            </div>
+    
+        </section>
+    
+        <section class="movements">
+            <h2 class="title">Movimientos</h2>
+            <div class="movements-list">
+                <ul>
+                    @for (movement of pokemon.moves; track $index) {
+                        <li>{{movement.move.name | upperFirstLetter}}</li>
+                    }
+                </ul>
+            </div>
+        </section>
+        
+        <section class="games">
+            <h2 class="title">Juegos</h2>
+            <div class="games-list">
+                <ul>
+                    @if (pokemon.game_indices.length == 0) {
+                        <li>Información no disponible</li>
+                    }
+                    @else {
+                        @for (game of pokemon.game_indices; track $index) {
+                            <li>{{game.version.name}}</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </section>
+    }
+    @placeholder {
+        <div>
+            Cargando
         </div>
-    </section>
-
-    <section class="stats">
-        <div class="stat-container">
-            <h2>HP</h2>
-            <div class="stat">10</div>
-        </div>
-
-        <div class="stat-container">
-            <h2>Ataque</h2>
-            <div class="stat">10</div>            
-        </div>
-
-        <div class="stat-container">
-            <h2>Defensa</h2>
-            <div class="stat">10</div>
-        </div>
-
-        <div class="stat-container">
-            <h2>At. Especial</h2>
-            <div class="stat">10</div>
-        </div>
-
-        <div class="stat-container">
-            <h2>Def. Especial</h2>
-            <div class="stat">10</div>
-        </div>
-
-        <div class="stat-container">
-            <h2>Velocidad</h2>
-            <div class="stat">10</div>
-        </div>
-
-    </section>
-
-    <section class="movements">
-        <h2 style="margin: 0;">Movimientos</h2>
-        <div class="movements-list">
-            <ul>
-                @for (movement of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]; track $index) {
-                    <li>1</li>
-                }
-            </ul>
-        </div>
-    </section>
-
-    <section class="games">
-        <h2 style="margin: 0;">Juegos</h2>
-        <div class="games-list">
-            <ul>
-                @for (movement of [1,1,1,1,1,1,1,1,1,1,1,1,1,1]; track $index) {
-                    <li>1</li>
-                }
-            </ul>
-        </div>
-    </section>
+    }
 
 </div>

@@ -11,6 +11,8 @@
     width: 100%;
     column-width: $cw;
     column-rule: 1px solid rgb(75 70 74);
+    font-size: 1.5rem;
+    padding-top: 15px;
 }
 
 .main {
@@ -208,6 +210,7 @@
 
     .movements {
         @include containers(30%, wrap);
+        overflow-y: auto;
 
         .movements-list {
             @include lists(20em);
@@ -216,6 +219,7 @@
 
     .games {
         @include containers(30%, wrap);
+        overflow-y: auto;
 
         .games-list {
             @include lists(25em)
@@ -231,4 +235,17 @@ h1 {
     height: 90%;
     width: 0%;
     border: 1px solid rgb(0, 0, 0, 30%);
+}
+
+.title {
+    margin: 0;
+    position: sticky; 
+    top: 0; 
+    background: rgb(197, 197, 197); 
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    box-shadow: rgb(0, 0, 0, 50%) 0 5px 20px;
 }
