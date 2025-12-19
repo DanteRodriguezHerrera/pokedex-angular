@@ -11,7 +11,7 @@
         @defer (when isLoading() == 1025) {
             
             @for (pokemon of filteredPokedex | slice : (pokedexPage - 1) * 20 : (pokedexPage - 1) * 20 + 20; track $index; let idx = $index ) {
-                <div class="pokemon-card">
+                <div class="pokemon-card" routerLink="/pokemon/{{pokemon.id}}">
                     <div class="pokemon-image">
                         <img src={{pokemon.url}} alt="">
                     </div>

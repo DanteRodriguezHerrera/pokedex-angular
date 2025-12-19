@@ -5,10 +5,11 @@ import { PokedexResponse, Result } from '../../core/interfaces/pokedex.interface
 import { range } from 'rxjs';
 import { PokemonResponse } from '../../core/interfaces/pokemon.interface';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pokedex',
-  imports: [SlicePipe, FormsModule, NgClass],
+  imports: [SlicePipe, FormsModule, NgClass, RouterLink],
   templateUrl: './pokedex.html',
   styleUrl: './pokedex.scss',
 })
