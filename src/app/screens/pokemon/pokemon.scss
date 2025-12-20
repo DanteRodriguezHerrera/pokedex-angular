@@ -2,8 +2,6 @@
     height: $h;
     display: flex;
     flex-wrap: $isWrap;
-    border-radius: 6px;
-    background: rgb(197, 197, 197);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -22,6 +20,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     overflow-y: auto;
+    background: url(https://static0.polygonimages.com/wordpress/wp-content/uploads/chorus/uploads/chorus_asset/file/23922676/Pokemon_SV_Worldmap.jpg);
+    background-size: cover;
 
     button {
         cursor: pointer;
@@ -52,10 +52,11 @@
         width: 25%;
         display: flex;
         flex-wrap: wrap;
-        // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-top-left-radius: 300px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background: radial-gradient(circle at 15% 0%, #DB0643, #52308B 100%);
 
             .pokemon-image {
-                background: rgb(197, 197, 197);
                 display: flex;
                 justify-content: center;
                 height: 80%;
@@ -72,14 +73,12 @@
                 align-items: center;
                 border-bottom-left-radius: 10px;
                 border-bottom-right-radius: 10px;
-                border-left: 3px solid rgb(197, 197, 197);
-                border-bottom: 3px solid rgb(197, 197, 197);
-                border-right: 3px solid rgb(197, 197, 197);
 
                 .type {
                     border: 1px solid black;
                     padding: 5px 10px;
                     border-radius: 10px;
+                    font-size: 1.5rem;
                 }
 
                 .bug {
@@ -160,12 +159,18 @@
     .general-info {
         width: 70%;
         align-items: center;
+        background: radial-gradient(circle at 100% -50%, #DB0643, #52308B 50%);
+        border-top-right-radius: 300px;
 
         @include containers(30%, nowrap);
 
         .general-column {
             width: 50%;
             padding: 0 20px;
+
+            h1, h2 {
+                color: white;
+            }
 
             .info {
                 display: flex;
@@ -187,8 +192,13 @@
 
     .stats {
         justify-content: space-around;
+        background: radial-gradient(circle at 50% 150%, #FFFFFF, #000000, #52308B 50%);
 
         @include containers(16%, nowrap);
+
+        h2 {
+            color: white;
+        }
 
         .stat-container {
             width: 10%;
@@ -211,18 +221,32 @@
     .movements {
         @include containers(30%, wrap);
         overflow-y: auto;
-
+        background: radial-gradient(circle at 50% 0%, #ffffff, #000000, rgb(235, 236, 245) 50%);
+        
         .movements-list {
             @include lists(20em);
+            
+            li {
+                background: rgba(235, 236, 245, 0.4);
+                color: #000000;
+                padding: 6px 10px;
+                list-style-position: inside;
+            }
         }
     }
 
     .games {
         @include containers(30%, wrap);
         overflow-y: auto;
+        background: #EBECF5;
+        border-bottom-left-radius: 300px;
+        border-bottom-right-radius: 300px;
+        text-align: center;
 
         .games-list {
-            @include lists(25em)
+            @include lists(20em);
+
+            list-style-position: inside;
         }
     }
 }

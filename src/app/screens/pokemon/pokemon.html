@@ -34,8 +34,7 @@
                             'rock': type.type.name == 'rock', 
                             'water': type.type.name == 'water', 
                             }">
-                            {{type.type.name}}
-                             <!-- Tipo -->
+                            {{type.type.name | upperFirstLetter}}
                         </div>
                     }
                 </div>
@@ -52,10 +51,6 @@
                     <h2>Peso</h2>
                     <div class="info-value">{{pokemon.weight / 10}} kg</div>
                 </div>
-                <!-- <div class="info">
-                    <h2>Generación de aparición</h2>
-                    <h2></h2>
-                </div> -->
             </div>
     
             <div class="divisor"></div>
@@ -112,7 +107,7 @@
         </section>
     
         <section class="movements">
-            <h2 class="title">Movimientos</h2>
+            <h2 class="title" style=" background: radial-gradient(circle at 50% 50%, #FFFFFF, #000000 25%); color: white;">Movimientos</h2>
             <div class="movements-list">
                 <ul>
                     @for (movement of pokemon.moves; track $index) {
